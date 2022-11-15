@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../V8CRM-MOCK-UI"
+		},
+		{
+			"path": "../vue3-sfc"
+		}
+	],
+	"settings": {}
+}
