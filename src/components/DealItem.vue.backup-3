@@ -1,6 +1,5 @@
 <template>
-  <!-- <li class="deal__cell" :draggable="draggable" @dragstart="dragStart" @dragover.prevent> -->
-  <li class="deal__cell" :draggable="draggable" @dragstart="dragStart">
+  <li class="deal__cell">
     <div class="deal">
       <div class="">
         <p class="deal__text">{{ deal.description }}</p>
@@ -29,34 +28,9 @@
 
 <script>
   export default {
-    methods: {
-      dragStart(e) {
-        const target = e.target.closest('.deal__cell');
-        // const wrappedTarget = `
-        //   <li class="deal__cell">
-        //     ${target}  
-        //   </li>
-        // `;
-        // console.log(wrappedTarget);
-        e.dataTransfer.effectAllowed = 'move';
-        // console.log(e.dataTransfer.setData('text/html', this.innerHTML));
-        // e.dataTransfer.setData('cardId', target.id);
-        e.dataTransfer.setData('text/html', target.outerHTML);
-        // setTimeout(() => {target.style.display = 'none'}, 0);
-        // console.log(JSON.stringify());
-        console.log(target);
-      }
-    },
     props: {
       deal: {
         type: Object
-      },
-      id: {
-        type: String
-      },
-      draggable: {
-        type: Boolean,
-        default: true
       }
     }
   }

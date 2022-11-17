@@ -133,33 +133,39 @@
 
       <!-- Deals section START -->
       <section class="deal__table">
-        <DealList id="list-1">
-          <DealItem v-for="deal in deals.leads" :key="deal.id" :deal="deal" 
-            :id="`deal-${deal.id}`" />
-        </DealList>
-        <DealList id="list-2">
-          <DealItem v-for="deal in deals.contacts" :key="deal.id" :deal="deal" 
-            :id="`deal-${deal.id}`" />
-        </DealList>
-        <DealList id="list-2">
-          <DealItem v-for="deal in deals.meetings" :key="deal.id" :deal="deal" 
-            :id="`deal-${deal.id}`" />
-        </DealList>
-        <DealList id="list-2">
-          <DealItem v-for="deal in deals.needs" :key="deal.id" :deal="deal" 
-            :id="`deal-${deal.id}`" />
-        </DealList>
-        <DealList id="list-2">
-          <DealItem v-for="deal in deals.proposals" :key="deal.id" :deal="deal" 
-            :id="`deal-${deal.id}`" />
-        </DealList>
-        <DealList id="list-2">
-          <DealItem v-for="deal in deals.contracts" :key="deal.id" :deal="deal" 
-            :id="`deal-${deal.id}`" />
-        </DealList>
+        <!-- <DealList :deals="deals.leads" stage="leads"/> -->
+        <!-- <DealList :deals="deals.contacts" stage="contacts"/> -->
+        <!-- <DealList :deals="deals.meetings" stage="meetings"/> -->
+        <!-- <DealList :deals="deals.needs" stage="needs"/> -->
+        <!-- <DealList :deals="deals.proposals" stage="proposals"/> -->
+        <!-- <DealList :deals="deals.contracts" stage="contracts"/> -->
+        <Container></Container>
+        <ul class="deal__column ">
+          <DealItem v-for="deal in deals.leads" :key="deal.id" :deal="deal"/>
+        </ul>
+        <Containe></Containe>
+        <ul class="deal__column ">
+          <DealItem v-for="deal in deals.contacts" :key="deal.id" :deal="deal"/>
+        </ul>
+        <Containe></Containe>
+        <ul class="deal__column ">
+          <DealItem v-for="deal in deals.meetings" :key="deal.id" :deal="deal"/>
+        </ul>
+        <Containe></Containe>
+        <ul class="deal__column ">
+          <DealItem v-for="deal in deals.needs" :key="deal.id" :deal="deal"/>
+        </ul>
+        <Containe></Containe>
+        <ul class="deal__column ">
+          <DealItem v-for="deal in deals.proposals" :key="deal.id" :deal="deal"/>
+        </ul>
+        <Containe></Containe>
+        <ul class="deal__column ">
+          <DealItem v-for="deal in deals.contracts" :key="deal.id" :deal="deal"/>
+        </ul>
+        
       </section>
       <!-- Deals section END -->
-
     </div>
     <!-- Main content END -->
 </template>
@@ -169,14 +175,12 @@
 <script>
   import deals from './deals';
   import DealItem from './components/DealItem.vue';
-  import DealList from './components/DealList.vue';
   import TheSideBar from './components/TheSideBar.vue';
   import TheNavbar from './components/TheNavbar.vue';
 
   export default {
     components: {
       DealItem,
-      DealList,
       TheSideBar,
       TheNavbar,
     },
