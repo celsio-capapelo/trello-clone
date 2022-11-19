@@ -1,6 +1,5 @@
 <template>
-  <!-- <li class="deal__cell" :draggable="draggable" @dragstart="dragStart" @dragover.prevent> -->
-  <li class="deal__cell" :draggable="draggable" @dragstart="dragStart">
+  <li class="deal__cell" >
     <div class="deal">
       <div class="">
         <p class="deal__text">{{ deal.description }}</p>
@@ -53,10 +52,6 @@
       },
       id: {
         type: String
-      },
-      draggable: {
-        type: Boolean,
-        default: true
       }
     }
   }

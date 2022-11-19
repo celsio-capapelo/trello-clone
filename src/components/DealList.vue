@@ -1,5 +1,5 @@
 <template>
-  <ul class="deal__column" :id="id" @dragover.prevent @drop.prevent="drop">
+  <ul class="deal__column" :id="id" >
     <slot />
   </ul>
   
@@ -27,6 +27,6 @@
         // console.log(e.dataTransfer.getData('text/html'));
       }
     },
-    props: ['id'],
+    props: ['id', 'deals', 'stage'],
   }
 </script>

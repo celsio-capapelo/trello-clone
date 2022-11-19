@@ -133,50 +133,17 @@
 
       <!-- Deals section START -->
       <section class="deal__table">
-        
-        
-        <draggable class="deal__column deal__column--leads" v-model="deals.leads" group="stage" 
-          @start="handleStart" :move="handeMove" 
-          @end="handleEnd" item-key="id" tag="ul" id="stage-1" @add="handleAdd" stage="leads">
-          <template #item="{element}">
-            <DealItem :deal="element" />
-          </template>
-        </draggable>
-        <draggable class="deal__column deal__column--contacts" v-model="deals.contacts" group="stage" 
-          @start="handleStart" :move="handeMove" 
-          @end="handleEnd" item-key="id" tag="ul" id="stage-2" @add="handleAdd" stage="contacts">
-          <template #item="{element}">
-            <DealItem :deal="element" />
-          </template>
-        </draggable>
-        <draggable class="deal__column deal__column--meetings" v-model="deals.meetings" group="stage" 
-          @start="handleStart" :move="handeMove" 
-          @end="handleEnd" item-key="id" tag="ul" id="stage-3" @add="handleAdd" stage="meetings">
-          <template #item="{element}">
-            <DealItem :deal="element" />
-          </template>
-        </draggable>
-        <draggable class="deal__column deal__column--needs" v-model="deals.needs" group="stage" 
-          @start="handleStart" :move="handeMove" 
-          @end="handleEnd" item-key="id" tag="ul" id="stage-4" @add="handleAdd" stage="needs">
-          <template #item="{element}">
-            <DealItem :deal="element" />
-          </template>
-        </draggable>
-        <draggable class="deal__column deal__column--proposals" v-model="deals.proposals" group="stage" 
-          @start="handleStart" :move="handeMove" 
-          @end="handleEnd" item-key="id" tag="ul" id="stage-5" @add="handleAdd" stage="proposals">
-          <template #item="{element}">
-            <DealItem :deal="element" />
-          </template>
-        </draggable>
-        <draggable class="deal__column deal__column--contracts" v-model="deals.contracts" group="stage" 
-          @start="handleStart" :move="handeMove" 
-          @end="handleEnd" item-key="id" tag="ul" id="stage-6" @add="handleAdd" stage="contracts">
-          <template #item="{element}">
-            <DealItem :deal="element" />
-          </template>
-        </draggable>
+        <DealList id="list-1" stage="leads">
+          <draggable v-for="deal in deals.leads" :list="deals.leads" group="stage">
+            <DealItem draggable="true" :deal="deal" :id="`deal-${deal.id}`" />
+          </draggable> 
+        </DealList>
+        <DealList id="list-2" stage="contacts">
+          <draggable v-for="deal in deals.contacts" :list="deals.contacts" group="contacts">
+            <DealItem draggable="true" :deal="deal" :id="`deal-${deal.id}`" />
+          </draggable> 
+        </DealList>
+         
         
         <!-- <DealList id="list-2">
           <DealItem v-for="deal in deals.leads" :key="deal.id" :deal="deal" 
@@ -209,23 +176,7 @@
     <!-- Main content END -->
 </template>
 
-<style>
-  .draggable-list {
-    background: #3f51b5;
-    color: #fff;
-    border: 1px solid;
-    height: 50vh;
-  }
-  .list-item {
-    margin: 10px;
-    padding: 40px;
-    cursor: pointer;
-    font-size: 18px;
-    border-radius: 5px;
-    background: #f44336;
-    display: inline-block;
-  }
-</style>
+<style></style>
 
 <script>
   import deals from './deals';
@@ -233,6 +184,7 @@
   import DealList from './components/DealList.vue';
   import TheSideBar from './components/TheSideBar.vue';
   import TheNavbar from './components/TheNavbar.vue';
+  import { Container, Draggable } from 'vue3-smooth-dnd';
   import draggable from "vuedraggable";
 
   export default {
@@ -241,46 +193,27 @@
       DealList,
       TheSideBar,
       TheNavbar,
-      draggable,
+      Container, 
+      Draggable
     },
     created() {
       this.deals = deals;
     },
     data() {
       return {
-        deals: null,
-        drag:false,
-        list1: [
-          { id: 1, name: "Item 1"},
-          { id: 2, name: "Item 2"},
-
-        ],
-        list2: [
-          { id: 3, name: "Item 3"},
-          { id: 2, name: "Item 4"},
-
-        ],
+        deals: null
       }
     },
     methods: {
-      handleStart(e) {
+      handleDragStart(dragResult) {
+        const payload = {dragResult};
+        console.log(payload.index);
       },
-      handleEnd(e) {
-
-      },
-      handleAdd(e) {
-        return false;
-      },
-      handeMove(e) {
-        // Prevent putting deals to 'needs stage' when this stage was passed
-        if ( e.to.getAttribute('class').includes('--needs')) {
-          if (e.from.getAttribute('class').includes('--proposals') 
-            || e.from.getAttribute('class').includes('--contracts')) {
-              console.log('Forbirdden');
-              // alert('You cannot retun to \'needs\' stage because you already have sent a proposal or contract.');
-              return false;
-            }
-        } 
+      handleDrop() {},
+      getChildPayload(index) {
+        return {
+          index,
+        }
       }
     }
   }
